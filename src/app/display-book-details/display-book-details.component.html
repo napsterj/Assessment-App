@@ -1,0 +1,48 @@
+<div class="container" style="width: 500px;">
+  <div class="mb-4" style="margin:auto">
+    <button type="button" class="btn btn-warning" (click)="navigateToHome()">Home</button>
+</div>
+  <div class="card">
+    <div class="card-header bg-warning">Book Details</div>
+    <div class="card-body">
+      <ng-container *ngIf="!book">
+        <h5 class="card-title text-primary">Book Information not available</h5>
+      </ng-container>
+      <ng-container *ngIf="book">
+        <h5 class="card-title"><strong>Book Title :</strong> <span style="margin-left: 17px;" class="bg-info">{{book.title}}</span></h5>
+        <div class="container mt-4 ml-3">        
+          <div class="row mb-3 mr-4 pr-4">
+            <p class="col-md-4">Author</p>
+            <div class="col-md-8">
+              {{book.author?.givenName}}
+            </div>
+          </div>
+          <div class="row mb-3">
+            <p class="col-md-4">Publisher</p>
+            <div class="col-md-8">
+              {{book.publisher}}
+            </div>
+          </div>
+          <div class="row mb-3">
+            <p class="col-md-4">Edition</p>
+            <div class="col-md-8">
+              {{book.edition}}
+            </div>
+          </div>
+          <div class="row mb-3">
+            <p class="col-md-4">ISBN</p>
+            <div class="col-md-8">
+              {{book.ISBN}}
+            </div>
+          </div>
+          <div class="row mb-3">
+            <p class="col-md-5">Publishing Date</p>
+            <div class="col-md-7">
+              {{book.publishingDate | date : 'dd-MM-yyyy'}}
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

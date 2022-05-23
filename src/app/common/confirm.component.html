@@ -1,0 +1,8 @@
+<button type="button" class="btn btn-danger btn-sm" (click)="openModal(template)">Delete</button>
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p class="text-danger">Are you sure you want to delete the book titled: <span class="text-info">{{title}}</span> - ?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()">Yes</button>
+    <button type="button" class="btn btn-danger" (click)="decline()">No</button>
+  </div>
+</ng-template>

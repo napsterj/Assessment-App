@@ -1,0 +1,44 @@
+<div class="container">
+    <table class="table" style="width: 1300px;">
+        <thead class="bg-info">
+            <tr>
+                <th>Title</th>
+                <th>ISBN</th>
+                <th>Author</th>
+                <th>Edition</th>
+                <th>Publisher</th>
+                <th>Publishing Date</th>
+                <!-- <div class="row col-md-2">             -->
+                <th>View</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let bookDetail of bookDetails">
+                <td>{{ bookDetail.title }}</td>
+                <td>{{ bookDetail.ISBN }}</td>                
+                <td>{{ bookDetail.author.givenName | authorNamePipe : editedAuthorName}} </td> 
+                <td>{{ bookDetail.edition }}</td>
+                <td>{{ bookDetail.publisher }}</td>
+                <td>
+                    {{ bookDetail.publishingDate | date: "dd-MM-yyyy" }}
+                </td>
+
+                <td>
+                    <a [routerLink]="['/book/display/', bookDetail.id]" class="active">View</a>
+                </td>
+                <td>
+                    <a [routerLink]="['/book/edit/', bookDetail.id]" class="active">Edit</a>
+                </td>
+                <td>
+                    <confirm-dialog [id]="bookDetail.id" [title]="bookDetail.title" (userAction)="DeleteBook($event)">
+                    </confirm-dialog>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="mt-5">
+        <button class="btn btn-info" (click)="addNewBook()">Add New Book</button>
+    </div>
+</div>

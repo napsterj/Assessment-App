@@ -1,0 +1,68 @@
+<div class="container" style="width:100pt;">
+    <div class="mb-4" style="margin:auto">
+        <button type="button" class="btn btn-warning" (click)="navigateToHome()">Home</button>
+    </div>
+    
+    <div class="form">
+        <h3>Edit book details</h3>
+        <form class="form-sm" #editBookForm="ngForm" (ngSubmit)="onSubmit(editBookForm)">
+            <input type="hidden" id="bookid" name="id" [(ngModel)] = "id">
+            <div class="mb-3">
+                <label for="booktitle" class="form-label">Title</label>
+                <input type="text" id="btitle" class="form-control" placeholder="e.g: Pride and Prejudice"
+                    name="title" #btitle="ngModel" [(ngModel)]="title" required/>
+                <div *ngIf="btitle.touched && btitle.invalid">                    
+                    <small>* Title is required</small>
+                </div>                
+            </div>
+            <div class="mb-3">
+                <label class="form-label">ISBN</label>
+                <input type="text" class="form-control" id="bookisbn" placeholder="000-000" name="ISBN" #bookisbn="ngModel" [(ngModel)]="ISBN" required />
+                <div *ngIf="bookisbn.touched && bookisbn.invalid">
+                    {{ISBN}}
+                    <small>* ISBN is required</small>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Author</label>
+                <select id="authorname" class="form-select" *ngIf="authors" (change)="onChange($event)" 
+                        name="givenName" #authorname="ngModel" required [(ngModel)]="givenName">                    
+                    <option *ngFor="let author of authors" 
+                            [value]="author?.givenName">                            
+                        {{ author?.givenName }} 
+                                  
+                    </option>
+                    <option value="Other">Other</option>
+                </select>
+                <br>
+                <div *ngIf="selected === 'Other'">
+                    <input type="text" class="form-control" id="otherauthorname" #otherauthorname="ngModel" name="other" [(ngModel)]="other">  
+                    <div *ngIf="editBookForm.controls['other'].invalid" class="mt-2">
+                        <span class="text-sm text-danger">* Other author name required</span>
+                    </div>             
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="editiontext">Edition</label>
+                <input type="text" id="bookedition" class="form-control" id="editiontext" name="edition" #bookedition="ngModel" [(ngModel)]="edition" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="publishername">Publisher</label>
+                <input type="text" class="form-control" id="publishername" name="publisher" #publishername="ngModel" [(ngModel)]="publisher" />
+            </div>
+            <div class="mb-3">
+                <div class="row">
+                    <label class="form-label" for="publishingdate">Publishing Date</label>
+                    <input id="date" type="text" placeholder="Publishing Date" class="form-control" 
+                           [(ngModel)]="publishingDate" placement="right" bsDatepicker
+                           name="publishingDate" #date="ngModel"
+                           [bsConfig]="{ isAnimated: true }"  />                                                                
+                </div>
+            </div>
+            <button type="submit" [disabled]="editBookForm.invalid" class="btn btn-primary">
+                Update
+            </button>           
+        </form>        
+    </div>
+    </div>
+

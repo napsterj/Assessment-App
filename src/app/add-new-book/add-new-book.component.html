@@ -1,0 +1,57 @@
+<div class="container" style="width:100pt;">
+<div class="mb-4" style="margin:auto">
+    <button type="button" class="btn btn-warning" (click)="navigateToHome()">Home</button>
+</div>
+
+<div class="form">
+    <h3>Add a new book</h3>
+    <form class="form-sm" [formGroup]="newBookForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="booktitle" class="form-label">Title</label>
+            <input type="text" class="form-control" id="booktitle" placeholder="e.g: Pride and Prejudice"
+                formControlName="title" />
+        </div>
+        <div class="mb-3">
+            <label for="bookisbn" class="form-label">ISBN</label>
+            <input type="text" class="form-control" id="bookisbn" placeholder="000-000" formControlName="ISBN" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Author</label>
+            <select class="form-select" *ngIf="authors" (change)="onChange($event)" formControlName="givenName">
+                <option value=""></option>
+                <option *ngFor="let author of authors" value="{{ author.givenName }}">
+                    {{ author.givenName }} 
+                </option>
+                <option value="Other">Other</option>
+            </select>
+            <br>
+            <div *ngIf="selected === 'Other'">
+                <input type="text" class="form-control" formControlName="other">  
+                <div *ngIf="validateOtherAuthor()" class="mt-2">
+                    <span class="text-sm text-danger">* Other author name required</span>
+                </div>             
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="editiontext">Edition</label>
+            <input type="text" class="form-control" id="editiontext" formControlName="edition" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="publishername">Publisher</label>
+            <input type="text" class="form-control" id="publishername" formControlName="publisher" />
+        </div>
+        <div class="mb-3">
+            <div class="row">
+                <label class="form-label" for="publishingdate">Publishing Date</label>
+                <input type="text" placeholder="Publishing Date" class="form-control" placement="right" bsDatepicker
+                    formControlName="publishingDate" [bsConfig]="{ isAnimated: true }" />
+            </div>
+        </div>
+        <button type="submit" [disabled]="(newBookForm.untouched || newBookForm.invalid) && 
+                                          (newBookForm.controls['other'].value === '')" class="btn btn-primary">
+            Submit
+        </button>
+    </form>
+    
+</div>
+</div>

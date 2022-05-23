@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { DataProviderService } from 'src/Services/dataproviderservice';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'book-details';
+  constructor(private dataService : DataProviderService){
+    this.dataService.GetBooks();
+  }  
 }
